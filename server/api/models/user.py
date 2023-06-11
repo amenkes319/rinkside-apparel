@@ -6,7 +6,12 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.set_password(password)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
