@@ -1,7 +1,6 @@
-from flask import Flask
+import os
 from flask_sqlalchemy import SQLAlchemy
 from .app_instance import app
-import os
 
 db = SQLAlchemy()
 
