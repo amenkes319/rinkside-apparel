@@ -3,3 +3,4 @@ server/base/
 __pycache__/
 *.pyc
 server/.env
+server/resources/
