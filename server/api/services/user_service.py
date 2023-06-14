@@ -27,6 +27,7 @@ def register_user(username: str, password: str) -> User:
 
     :param username: The username of the new user.
     :param password: The password of the new user.
+    
     :return: True if the user was created successfully, False if the username already exists.
     """
     user = User.query.filter_by(username=username).first()

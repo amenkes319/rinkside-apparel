@@ -7,8 +7,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.TIMESTAMP, nullable=False, server_default=db.func.current_timestamp())
-    updated_at = db.Column(db.TIMESTAMP, nullable=False, server_default=db.func.current_timestamp(), server_onupdate=db.func.current_timestamp())
+    created_at = db.Column(db.TIMESTAMP, nullable=False, default=db.func.current_timestamp())
+    updated_at = db.Column(db.TIMESTAMP, nullable=False, default=db.func.current_timestamp())
 
     def __init__(self, id: int, username: str, password: str):
         self.id = id
