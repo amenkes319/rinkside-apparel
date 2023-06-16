@@ -1,5 +1,5 @@
 import json
-from flask import Blueprint, Response, abort, jsonify, make_response, request 
+from flask import Blueprint, Response, jsonify, make_response, request 
 from api.services import item_service
 from api.models.item import Item
 
