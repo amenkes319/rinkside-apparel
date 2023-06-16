@@ -6,3 +6,6 @@ api_bp.register_blueprint(user_bp)
 
 from .item_routes import bp as item_bp
 api_bp.register_blueprint(item_bp)
+
+from .cart_routes import bp as cart_bp
+api_bp.register_blueprint(cart_bp)

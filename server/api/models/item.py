@@ -40,8 +40,6 @@ class Item(db.Model):
             'category': self.category,
             'size': self.size,
             'color': self.color,
-            'stock': self.stock,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'stock': self.stock
         }
     
