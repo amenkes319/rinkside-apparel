@@ -1,4 +1,4 @@
-from flask import Blueprint, Response, jsonify, make_response, request 
+from flask import Blueprint, Response, jsonify, make_response, request, session
 from api.services import user_service
 from api.models.user import User
 
@@ -23,9 +23,26 @@ def login() -> Response:
         return make_response(jsonify({"error": "Username or Password missing"}), 400)
 
     user = user_service.login(username, password)
-    if user:
-        return make_response(jsonify(user.serialize()), 200)
-    return make_response(jsonify({"error": "Username or Password incorrect"}), 401)
+    if not user:
+        return make_response(jsonify({"error": "Username or Password incorrect"}), 401)
+    
+    session['user_id'] = user.id
+    return make_response(jsonify(user.serialize()), 200)
+
+@bp.route('/session/', methods=['GET'])
+def session_user() -> Response:
+    """
+    Response to a GET request to /user/session. Checks if a user is logged in.
+
+    :return: Response with HTTP status of UNAUTHORIZED if the user is not logged in.
+    Response with HTTP status of OK and the user.
+    """
+    user_id = session.get('user_id')
+    if not user_id:
+        return make_response(jsonify({"error": "User not logged in"}), 401)
+    
+    user = user_service.get_user(user_id)
+    return make_response(jsonify(user.serialize()), 200)
 
 @bp.route('/', methods=['GET'])
 def get_users() -> Response:
