@@ -1,11 +1,11 @@
-import os
 from flask_sqlalchemy import SQLAlchemy
-from .app_instance import app
+from app_instance import app
+from config import ApplicationConfig
 
 db = SQLAlchemy()
 
 def create_app():
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config.from_object(ApplicationConfig)
     db.init_app(app)
 
     from .routes import api_bp

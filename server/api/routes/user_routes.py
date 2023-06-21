@@ -16,7 +16,7 @@ def login() -> Response:
     Response with HTTP status of UNAUTHORIZED if the username or password is incorrect.
     Response with HTTP status of OK and the user.
     """
-    data = request.json
+    data = request.authorization
     username = data.get('username')
     password = data.get('password')
     if not username or not password:
@@ -48,9 +48,9 @@ def create_user() -> Response:
     Response with HTTP status of CONFLICT if the username already exists.
     Response with HTTP status of CREATED if the user was created successfully.
     """
-    data = request.json
-    username = data.get('username')
-    password = data.get('password')
+    auth = request.authorization
+    username = auth.get('username')
+    password = auth.get('password')
     if not username or not password:
         return make_response(jsonify({"error": "Username or Password missing"}), 400)
 
