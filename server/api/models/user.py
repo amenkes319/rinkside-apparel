@@ -23,9 +23,21 @@ class User(db.Model):
         target.updated_at = db.func.current_timestamp()
 
     def set_password(self, password: str):
+        """
+        Sets the password for the user.
+
+        :param password: The password to set.
+        """
         self.password = generate_password_hash(password, method='scrypt', salt_length=16)
 
     def check_password(self, password: str) -> bool:
+        """
+        Checks if the password is correct.
+
+        :param password: The password to check in plain text.
+
+        :return: True if the password is correct, False otherwise.
+        """
         return check_password_hash(self.password, password)
     
     def serialize(self) -> dict:
